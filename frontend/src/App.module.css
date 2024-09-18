@@ -1,0 +1,143 @@
+.App {
+  text-align: center;
+}
+
+.logo {
+  animation: logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.link {
+  color: #b318f0;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.Gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4.75em auto 0 auto;
+    width: 80vw;
+}
+
+.gallery {
+  --size: 100px;
+  display: grid;
+  grid-template-columns: repeat(6, var(--size));
+  grid-auto-rows: var(--size);
+  margin-bottom: var(--size);
+  place-items: start center;
+  gap: 5px;
+}
+
+.gallery:has(:hover) img:not(:hover),
+.gallery:has(:focus) img:not(:focus) {
+  filter: brightness(0.5) contrast(0.5);
+}
+
+.gallery img {
+  object-fit: cover;
+  width: calc(var(--size) * 2);
+  height: calc(var(--size) * 2);
+  clip-path: path(
+    "M90,10 C100,0 100,0 110,10 190,90 190,90 190,90 200,100 200,100 190,110 190,110 110,190 110,190 100,200 100,200 90,190 90,190 10,110 10,110 0,100 0,100 10,90Z"
+  );
+  transition:
+    clip-path 0.25s,
+    filter 0.75s;
+  grid-column: auto / span 2;
+  border-radius: 5px;
+}
+
+.gallery img:nth-child(5n -1),
+.spinner:nth-child(5n -1)
+{
+  grid-column: 2 / span 2;
+}
+
+.gallery img:hover,
+.gallery img:focus {
+  clip-path: path(
+    "M0,0 C0,0 200,0 200,0 200,0 200,100 200,100 200,100 200,200 200,200 200,200 100,200 100,200 100,200 100,200 0,200 0,200 0,100 0,100 0,100 0,100 0,100Z"
+  );
+  z-index: 1;
+  transition:
+    clip-path 0.25s,
+    filter 0.25s;
+  cursor: pointer;
+}
+
+.gallery img:focus {
+  outline: 1px dashed black;
+  outline-offset: -5px;
+}
+
+
+.spinner,
+.spinner div {
+    box-sizing: border-box;
+}
+
+.spinner {
+    display: inline-block;
+    position: relative;
+    margin-top: 3.25em;
+    grid-column: auto / span 2;
+    width: 80px;
+    height: 80px;
+}
+
+.spinner div {
+    display: block;
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    margin: 10px auto;
+    border: 10px solid transparent;
+    border-top: 10px solid currentcolor;
+    border-radius: 50%;
+    animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.spinner div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+.spinner div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+.spinner div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Mobile specific css */
+@media only screen and (max-width: 32.5em) {
+    .gallery  {
+        scale: 0.50;
+    }
+}
+

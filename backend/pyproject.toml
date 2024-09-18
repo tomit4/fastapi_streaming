@@ -1,0 +1,46 @@
+[project]
+name = "fastapi-app"
+version = "0.0.1"
+description = "A Generic FastAPI Starter App Template"
+authors = [{ name = "johndoe", email = "johndoe@example.com" }]
+dependencies = [
+  "fastapi>=0.112.1",
+  "uvicorn>=0.30.6",
+  "python-dotenv>=1.0.1",
+  "sqlalchemy>=2.0.32",
+  "alembic>=1.13.2",
+  "httpx>=0.27.0",
+  "asyncpg>=0.29.0",
+  "pydantic-settings>=2.4.0",
+  "email-validator>=2.2.0",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+  "pytest>=8.3.2",
+  "black>=24.8.0",
+  "isort>=5.13.2",
+  "pytest-asyncio>=0.24.0",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fastapi_app"]
+
+[tool.rye.scripts]
+dev = "uvicorn fastapi_app.main:app --host :: --port 8000 --reload"
+upgrade = "alembic --config ./src/fastapi_app/alembic.ini upgrade"
+downgrade = "alembic --config ./src/fastapi_app/alembic.ini downgrade"
+generate = "alembic --config ./src/fastapi_app/alembic.ini revision --autogenerate -m"
+
+[project.scripts]
+start = "fastapi_app.main:main"
